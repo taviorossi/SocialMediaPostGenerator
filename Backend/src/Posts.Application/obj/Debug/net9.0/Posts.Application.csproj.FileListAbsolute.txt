@@ -1,0 +1,15 @@
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.csproj.AssemblyReference.cache
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.AssemblyInfoInputs.cache
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.AssemblyInfo.cs
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.csproj.CoreCompileInputs.cache
+C:\Projetos\Posts\backend\src\Posts.Application\bin\Debug\net9.0\Posts.Application.deps.json
+C:\Projetos\Posts\backend\src\Posts.Application\bin\Debug\net9.0\Posts.Application.dll
+C:\Projetos\Posts\backend\src\Posts.Application\bin\Debug\net9.0\Posts.Application.pdb
+C:\Projetos\Posts\backend\src\Posts.Application\bin\Debug\net9.0\Posts.Domain.dll
+C:\Projetos\Posts\backend\src\Posts.Application\bin\Debug\net9.0\Posts.Domain.pdb
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Ap.99FF3394.Up2Date
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.dll
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\refint\Posts.Application.dll
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\Posts.Application.pdb
+C:\Projetos\Posts\backend\src\Posts.Application\obj\Debug\net9.0\ref\Posts.Application.dll
