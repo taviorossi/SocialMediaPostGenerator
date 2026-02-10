@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\Posts.Domain.csproj": {}
+    "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\Posts.Domain.csproj": {
+    "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\Posts.Domain.csproj",
+        "projectUniqueName": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
         "projectName": "Posts.Domain",
-        "projectPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\Posts.Domain.csproj",
+        "projectPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
         "packagesPath": "C:\\Users\\octavio.rossi\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\obj\\",
+        "outputPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

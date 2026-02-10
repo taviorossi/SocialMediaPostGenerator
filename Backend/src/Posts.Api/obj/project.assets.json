@@ -1461,11 +1461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\Posts\\backend\\src\\Posts.Api\\Posts.Api.csproj",
+      "projectUniqueName": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Api\\Posts.Api.csproj",
       "projectName": "Posts.Api",
-      "projectPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Api\\Posts.Api.csproj",
+      "projectPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Api\\Posts.Api.csproj",
       "packagesPath": "C:\\Users\\octavio.rossi\\.nuget\\packages\\",
-      "outputPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Api\\obj\\",
+      "outputPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1486,11 +1486,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Projetos\\Posts\\backend\\src\\Posts.Application\\Posts.Application.csproj": {
-              "projectPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Application\\Posts.Application.csproj"
+            "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Application\\Posts.Application.csproj": {
+              "projectPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Application\\Posts.Application.csproj"
             },
-            "C:\\Projetos\\Posts\\backend\\src\\Posts.Infrastructure\\Posts.Infrastructure.csproj": {
-              "projectPath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Infrastructure\\Posts.Infrastructure.csproj"
+            "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Infrastructure\\Posts.Infrastructure.csproj": {
+              "projectPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Infrastructure\\Posts.Infrastructure.csproj"
             }
           }
         }

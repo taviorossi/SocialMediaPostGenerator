@@ -8,7 +8,7 @@ using Posts.Application.Interfaces;
 namespace Posts.Infrastructure.Gemini;
 
 /// <summary>
-/// Geração de roteiro via Google Vertex AI (Gemini 1.5 Flash).
+/// Geração de roteiro via Google AI Studio (API key) ou Vertex AI (ADC).
 /// </summary>
 public class GeminiService : IGeminiService
 {
@@ -23,12 +23,8 @@ public class GeminiService : IGeminiService
 
     public async Task<string> GenerateScriptAsync(Stream imageStream, string? theme, CancellationToken cancellationToken = default)
     {
-        var token = await GetAccessTokenAsync(cancellationToken);
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
         var imageBytes = await CopyToByteArrayAsync(imageStream);
         var imageBase64 = Convert.ToBase64String(imageBytes);
-
         var prompt = BuildPrompt(theme);
         var requestBody = new
         {
@@ -57,7 +53,22 @@ public class GeminiService : IGeminiService
             }
         };
 
-        var url = $"https://{_options.Location}-aiplatform.googleapis.com/v1/projects/{_options.ProjectId}/locations/{_options.Location}/publishers/google/models/{_options.GeminiModel}:generateContent";
+        string url;
+        _httpClient.DefaultRequestHeaders.Remove("x-goog-api-key");
+        if (!string.IsNullOrWhiteSpace(_options.ApiKey))
+        {
+            // Google AI Studio (generativelanguage.googleapis.com)
+            _httpClient.DefaultRequestHeaders.Add("x-goog-api-key", _options.ApiKey);
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+            url = $"https://generativelanguage.googleapis.com/v1beta/models/{_options.GeminiModel}:generateContent";
+        }
+        else
+        {
+            var token = await GetAccessTokenAsync(cancellationToken);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            url = $"https://{_options.Location}-aiplatform.googleapis.com/v1/projects/{_options.ProjectId}/locations/{_options.Location}/publishers/google/models/{_options.GeminiModel}:generateContent";
+        }
+
         var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(url, content, cancellationToken);
         response.EnsureSuccessStatusCode();
@@ -88,7 +99,7 @@ public class GeminiService : IGeminiService
         var credential = GoogleCredential.GetApplicationDefault();
         if (credential.IsCreateScopedRequired)
             credential = credential.CreateScoped("https://www.googleapis.com/auth/cloud-platform");
-        return await ((Google.Apis.Auth.OAuth2.ITokenAccess)credential).GetAccessTokenForRequestAsync(cancellationToken: cancellationToken);
+        return await ((ITokenAccess)credential).GetAccessTokenForRequestAsync(cancellationToken: cancellationToken);
     }
 
     private static async Task<byte[]> CopyToByteArrayAsync(Stream stream)

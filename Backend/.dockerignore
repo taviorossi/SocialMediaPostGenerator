@@ -1,6 +1,7 @@
 **/.dockerignore
 **/.env
 **/.git
+**/appsettings.*.Local.json
 **/.vs
 **/bin
 **/obj

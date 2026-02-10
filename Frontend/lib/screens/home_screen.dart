@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/api_config.dart';
-import '../models/generate_video_response.dart';
 import '../models/video_job_status_response.dart';
 import '../services/video_api_service.dart';
 
@@ -18,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final VideoApiService _api = VideoApiService(baseUrl: kBackendBaseUrl);
+  final ImagePicker _imagePicker = ImagePicker();
   String? _jobId;
   VideoJobStatusResponse? _status;
   String? _error;
@@ -30,7 +30,47 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  Future<void> _pickAndUpload() async {
+  void _showImageSourceSheet() {
+    if (_loading) return;
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Escolha a imagem',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Galeria'),
+                subtitle: const Text('Selecionar foto da galeria'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _pickAndUpload(source: ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Câmera'),
+                subtitle: const Text('Tirar uma foto agora'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _pickAndUpload(source: ImageSource.camera);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _pickAndUpload({required ImageSource source}) async {
     setState(() {
       _error = null;
       _status = null;
@@ -38,16 +78,24 @@ class _HomeScreenState extends State<HomeScreen> {
       _loading = true;
     });
     try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowMultiple: false,
+      final XFile? xFile = await _imagePicker.pickImage(
+        source: source,
+        imageQuality: 85,
       );
-      if (result == null || result.files.isEmpty || result.files.single.path == null) {
+      if (xFile == null || !mounted) {
         setState(() => _loading = false);
         return;
       }
-      final path = result.files.single.path!;
+      final path = xFile.path;
+      if (path == null || path.isEmpty) {
+        setState(() {
+          _loading = false;
+          _error = 'Não foi possível obter o arquivo da imagem.';
+        });
+        return;
+      }
       final response = await _api.uploadImage(path);
+      if (!mounted) return;
       setState(() {
         _jobId = response.jobId;
         _loading = false;
@@ -57,7 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       });
       _startPolling();
-    } catch (e, st) {
+    } catch (e) {
+      if (!mounted) return;
       setState(() {
         _error = e.toString();
         _loading = false;
@@ -94,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: _loading ? null : _pickAndUpload,
+              onPressed: _loading ? null : _showImageSourceSheet,
               icon: _loading
                   ? const SizedBox(
                       width: 20,
@@ -113,7 +162,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Theme.of(context).colorScheme.errorContainer,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(_error!, style: TextStyle(color: Theme.of(context).colorScheme.onErrorContainer)),
+                  child: Text(
+                    _error!,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    ),
+                  ),
                 ),
               ),
             if (_status != null) ...[
@@ -132,7 +186,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       _StatusRow(label: 'Job ID', value: _status!.jobId),
                       _StatusRow(label: 'Etapa', value: _status!.statusLabel),
                       if (_status!.errorMessage != null)
-                        _StatusRow(label: 'Erro', value: _status!.errorMessage!),
+                        _StatusRow(
+                          label: 'Erro',
+                          value: _status!.errorMessage!,
+                        ),
                       if (_status!.videoUrl != null) ...[
                         const SizedBox(height: 12),
                         const Text('Vídeo pronto:'),
@@ -145,7 +202,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         OutlinedButton.icon(
                           onPressed: () {
                             final uri = Uri.tryParse(_status!.videoUrl!);
-                            if (uri != null) launchUrl(uri, mode: LaunchMode.externalApplication);
+                            if (uri != null) {
+                              launchUrl(
+                                uri,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            }
                           },
                           icon: const Icon(Icons.open_in_new),
                           label: const Text('Abrir vídeo'),
@@ -178,7 +240,10 @@ class _StatusRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 100,
-            child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
           ),
           Expanded(child: SelectableText(value)),
         ],

@@ -1,0 +1,9 @@
+# Chaves locais - NUNCA commitar
+**/appsettings.*.Local.json
+
+# Build / IDE
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo

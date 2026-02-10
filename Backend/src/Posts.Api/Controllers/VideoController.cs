@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Posts.Api.Models;
 using Posts.Application.DTOs.Api;
 using Posts.Application.Interfaces;
 using Posts.Application.Services;
@@ -27,8 +28,9 @@ public class VideoController : ControllerBase
     [RequestSizeLimit(10 * 1024 * 1024)]
     [ProducesResponseType(typeof(GenerateVideoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Generate([FromForm] IFormFile? image, [FromForm] string? theme, [FromForm] string? voiceId)
+    public IActionResult Generate([FromForm] GenerateVideoFormRequest request)
     {
+        var image = request?.Image;
         if (image == null || image.Length == 0)
             return BadRequest("Envie um arquivo de imagem (multipart/form-data, key: image).");
 
@@ -37,7 +39,7 @@ public class VideoController : ControllerBase
             return BadRequest("Tipo de arquivo não suportado. Use JPEG, PNG ou WebP.");
 
         using var stream = image.OpenReadStream();
-        var response = _orchestrator.GenerateVideo(stream, theme, voiceId);
+        var response = _orchestrator.GenerateVideo(stream, request.Theme, request.VoiceId);
         return Ok(response);
     }
 

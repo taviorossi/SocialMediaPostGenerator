@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nEjCC6MksSs=",
+  "dgSpecHash": "i7PbaAcRV1Y=",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Api\\Posts.Api.csproj",
+  "projectFilePath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Api\\Posts.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\octavio.rossi\\.nuget\\packages\\google.apis\\1.68.0\\google.apis.1.68.0.nupkg.sha512",
     "C:\\Users\\octavio.rossi\\.nuget\\packages\\google.apis.auth\\1.68.0\\google.apis.auth.1.68.0.nupkg.sha512",

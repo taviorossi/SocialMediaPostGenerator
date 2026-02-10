@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WKdxfmHhy/U=",
+  "dgSpecHash": "yazCEhozfRA=",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\Posts\\backend\\src\\Posts.Domain\\Posts.Domain.csproj",
+  "projectFilePath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Projetos\\Posts\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
+      "projectUniqueName": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
       "projectName": "Posts.Domain",
-      "projectPath": "c:\\Projetos\\Posts\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
+      "projectPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\Posts.Domain.csproj",
       "packagesPath": "C:\\Users\\octavio.rossi\\.nuget\\packages\\",
-      "outputPath": "c:\\Projetos\\Posts\\Backend\\src\\Posts.Domain\\obj\\",
+      "outputPath": "C:\\Projetos\\SocialMediaPostGenerator\\Backend\\src\\Posts.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
